@@ -1,0 +1,65 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<form action="{% url 'excel:uploadFile' %}" method="POST" enctype="multipart/form-data">
+        <input type="text" name="fileTitle" placeholder="Enter a title">
+        <input type="file" multiple name="uploadedFile">
+        {% csrf_token %}
+        <input type="submit" value="Upload">
+</form>
+<div class="container my-3">
+    <table class="table">
+        <thead>
+        <tr class="table-dark">
+            <th>번호</th>
+            <th>제목</th>
+            <th>작성일시</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% if files %}
+        {% for file in files %}
+        <tr>
+            <td>{{ forloop.counter }}</td>
+            <td>
+                <a href="/pybo{{ file.uploadedFile.url }}/">{{ file.uploadedFile.url }}</a>
+            </td>
+            <td>{{ file.dateTimeOfUpload }}</td>
+        </tr>
+        {% endfor %}
+        {% else %}
+        <tr>
+            <td colspan="3">질문이 없습니다.</td>
+        </tr>
+        {% endif %}
+        </tbody>
+    </table>
+</div>
+<!--<table>-->
+<!--        <tr>-->
+<!--            <th>ID</th>-->
+<!--            <th>Title</th>-->
+<!--            <th>File Path</th>-->
+<!--            <th>Upload Date & Time</th>-->
+<!--        </tr>-->
+<!--        {% for file in files %}-->
+<!--            <tr>-->
+<!--                <td>{{ file.id }}</td>-->
+<!--                <td>{{ file.title }}</td>-->
+<!--                <td>{{ file.uploadedFile.url }}</td>-->
+<!--                <td>{{ file.dateTimeOfUpload }}</td>-->
+<!--            </tr>-->
+<!--        {% endfor %}-->
+<!--    </table>-->
+
+<!--{% if files %}-->
+<!--    <ul>-->
+<!--    {% for file in files %}-->
+<!--        <li><a href="/pybo{{ file.uploadedFile.url }}/">{{ file.id }}</a></li>-->
+<!--    {% endfor %}-->
+<!--    </ul>-->
+<!--{% else %}-->
+<!--    <p>파일이 없습니다.</p>-->
+<!--{% endif %}-->
+
+{% endblock %}
