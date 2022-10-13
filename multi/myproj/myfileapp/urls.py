@@ -4,7 +4,7 @@ from . import views
 app_name = "fileapp"
 
 urlpatterns = [
-    path('', views.index),
+    path('', views.index, name ="index"),
     path("upload", views.send_files, name="uploads")
 
 ]

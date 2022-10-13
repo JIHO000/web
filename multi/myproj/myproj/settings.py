@@ -31,6 +31,7 @@ ALLOWED_HOSTS = ["*"]
 # Application definition
 
 INSTALLED_APPS = [
+    'common.apps.CommonConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -128,3 +129,10 @@ STATICFILES_DIRS = [
 
 MEDIA_URL ="/media/"
 MEDIA_ROOT = BASE_DIR/"media"
+
+
+# 로그인 성공후 이동하는 URL
+LOGIN_REDIRECT_URL = '/'
+
+# 로그아웃시 이동하는 URL
+LOGOUT_REDIRECT_URL = '/'
